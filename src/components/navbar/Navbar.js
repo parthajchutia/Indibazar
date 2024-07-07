@@ -123,8 +123,9 @@ function Navbar() {
                       </Link>
                     </div>
                   )}
+
                   <div className="flow-root">
-                  <Link
+                    <Link
                       to={"/"}
                       className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
                     >
@@ -140,7 +141,7 @@ function Navbar() {
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="/" className="-m-2 flex items-center p-2">
                     <img
-                      src="img/indiaflag.png"
+                      src=""
                       alt="india"
                       className="block h-auto w-5 flex-shrink-0"
                     />
@@ -158,6 +159,9 @@ function Navbar() {
           </div>
         </Dialog>
       </Transition.Root>
+
+
+    
 
       <header className="relative bg-white">
         <p
@@ -213,7 +217,7 @@ function Navbar() {
                       className=" text-2xl font-bold text-black  px-2 py-1 rounded"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      E-Bharat
+                      Indibazar
                     </h1>
                   </div>
                 </Link>
@@ -245,8 +249,7 @@ function Navbar() {
                       Signup
                     </Link>
                   )}
-
-                  {user?.user?.email === "knupadhyay784@gmail.com" ? (
+                  {user?.user?.email === "parthajyoti2003@gmail.com" ? (
                     <Link
                       to={"/dashboard"}
                       className="text-sm font-medium text-gray-700 "
@@ -291,7 +294,7 @@ function Navbar() {
                     <img
                       className="inline-block w-10 h-10 rounded-full"
                       src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF-bcGBxBHILbnh7_FTJupbPJFofgbKW04UKCop7ypJb90DD_LYJC_i2fCvCFYBcdpqkk&usqp=CAU"
-                      alt="Dan_Abromov"
+                      alt="Dan_"
                     />
                   </a>
                 </div>
