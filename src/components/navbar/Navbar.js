@@ -1,31 +1,29 @@
-import { Fragment, useContext, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useContext, useState } from "react";
+import myContext from "../../context/data/myContext";
 import { BsFillCloudSunFill } from "react-icons/bs";
 import { FiSun } from "react-icons/fi";
-import myContext from "../../context/data/myContext";
+import { Link } from "react-router-dom";
+import { Dialog, Transition } from "@headlessui/react";
 import { RxCross2 } from "react-icons/rx";
 import { useSelector } from "react-redux";
 
-export default function Navbar() {
+function Navbar() {
+  const context = useContext(myContext);
+  const { mode, toggleMode } = context;
+
   const [open, setOpen] = useState(false);
 
-  const context = useContext(myContext);
-  const { toggleMode, mode } = context; 
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const user = JSON.parse(localStorage.getItem('user'));
+  const logout = () => {
+    localStorage.clear("user");
+    window.location.href = "/login";
+  };
 
-
-  
-  const logout = () =>{
-    localStorage.clear('user')
-    window.location.href = '/login'
-  } 
-  const cartItem = useSelector((state) => state.cart)
-
+  const cartItems = useSelector((state) => state.cart);
 
   return (
-    <div className="bg-white sticky top-0 z-50 ">
+    <div className="bg-white sticky top-0 z-50">
       <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-40 lg:hidden" onClose={setOpen}>
           <Transition.Child
@@ -75,44 +73,65 @@ export default function Navbar() {
                   >
                     All Products
                   </Link>
-                  <div className="flow-root">
-                   
-                   {user ? <Link
-                      to={"/order"}
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                    >
-                      Order
-                    </Link>: ""}
-                  </div>
 
-                  <div className="flow-root">
-                    {user ? <Link
-                      to={"/dashboard"}
-                      className="-m-2 block p-2 font-medium text-gray-900"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      admin
-                    </Link> : ""} 
-                  </div>
+                  {user ? (
+                    <div className="flow-root">
+                      <Link
+                        to={"/order"}
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                      >
+                        Order
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
 
+                  {user?.user?.email === "knupadhyay784@gmail.com" ? (
+                    <div className="flow-root">
+                      <Link
+                        to={"/dashboard"}
+                        className="-m-2 block p-2 font-medium text-gray-900"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        admin
+                      </Link>
+                    </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {user ? (
+                    <div className="flow-root">
+                      <a
+                        onClick={logout}
+                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        Logout
+                      </a>
+                    </div>
+                  ) : (
+                    <div className="flow-root">
+                      <Link
+                        to={"/signup"}
+                        className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
+                        style={{ color: mode === "dark" ? "white" : "" }}
+                      >
+                        Signup
+                      </Link>
+                    </div>
+                  )}
                   <div className="flow-root">
-                    <a href="/Login"
-                      className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
-                      style={{ color: mode === "dark" ? "white" : "" }}
-                    >
-                      Logout
-                    </a>
-                  </div>
-                  <div className="flow-root">
-                    <Link
+                  <Link
                       to={"/"}
                       className="-m-2 block p-2 font-medium text-gray-900 cursor-pointer"
                     >
                       <img
                         className="inline-block w-10 h-10 rounded-full"
-                        src="https://media.licdn.com/dms/image/C4E03AQGQpyzCu-8lMQ/profile-displayphoto-shrink_200_200/0/1633400110598?e=2147483647&v=beta&t=vg4qKoJr98LPwJ6lYI88gZ2R4mFdS0vgZxBmqIQAYr8"
-                        alt="Dan_Abromov"
+                        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF-bcGBxBHILbnh7_FTJupbPJFofgbKW04UKCop7ypJb90DD_LYJC_i2fCvCFYBcdpqkk&usqp=CAU"
+                        alt="image"
                       />{" "}
                     </Link>
                   </div>
@@ -121,8 +140,8 @@ export default function Navbar() {
                 <div className="border-t border-gray-200 px-4 py-6">
                   <a href="/" className="-m-2 flex items-center p-2">
                     <img
-                      src="https://ecommerce-sk.vercel.app/img/indiaflag.png"
-                      alt=""
+                      src="img/indiaflag.png"
+                      alt="india"
                       className="block h-auto w-5 flex-shrink-0"
                     />
                     <span
@@ -140,16 +159,9 @@ export default function Navbar() {
         </Dialog>
       </Transition.Root>
 
-
-
-
-
-    {/*Desktop*/}
-
-
       <header className="relative bg-white">
         <p
-          className="flex h-10 items-center justify-center bg-red-700 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
+          className="flex h-10 items-center justify-center bg-pink-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8"
           style={{
             backgroundColor: mode === "dark" ? "rgb(62 64 66)" : "",
             color: mode === "dark" ? "white" : "",
@@ -202,7 +214,7 @@ export default function Navbar() {
                       className=" text-2xl font-bold text-black  px-2 py-1 rounded"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      Indibazar
+                      E-Bharat
                     </h1>
                   </div>
                 </Link>
@@ -217,29 +229,47 @@ export default function Navbar() {
                   >
                     All Products
                   </Link>
-                 {user ? <Link
-                    to={"/order"}
-                    className="text-sm font-medium text-gray-700 "
-                    style={{ color: mode === "dark" ? "white" : "" }}
-                  >
-                    Order
-                  </Link> : "" }
+                  {user ? (
+                    <Link
+                      to={"/order"}
+                      className="text-sm font-medium text-gray-700 "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Order
+                    </Link>
+                  ) : (
+                    <Link
+                      to={"/signup"}
+                      className="text-sm font-medium text-gray-700 "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Signup
+                    </Link>
+                  )}
 
-                 {user?.user?.email ==='parthajyoti2003@gmail.com' ?
-                  <Link
-                    to={"/dashboard"}
-                    className="text-sm font-medium text-gray-700 "
-                    style={{ color: mode === "dark" ? "white" : "" }}
-                  >
-                    Admin
-                  </Link> : ""}
-                  {user ?
-                  <a onClick={logout }
-                    className="text-sm font-medium text-gray-700 cursor-pointer  "
-                    style={{ color: mode === "dark" ? "white" : "" }}
-                  >
-                    Logout
-                  </a> : ""}
+                  {user?.user?.email === "knupadhyay784@gmail.com" ? (
+                    <Link
+                      to={"/dashboard"}
+                      className="text-sm font-medium text-gray-700 "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Admin
+                    </Link>
+                  ) : (
+                    ""
+                  )}
+
+                  {user ? (
+                    <a
+                      onClick={logout}
+                      className="text-sm font-medium text-gray-700 cursor-pointer  "
+                      style={{ color: mode === "dark" ? "white" : "" }}
+                    >
+                      Logout
+                    </a>
+                  ) : (
+                    ""
+                  )}
                 </div>
 
                 <div className="hidden lg:ml-8 lg:flex">
@@ -261,16 +291,14 @@ export default function Navbar() {
                   <a href="/" className="flex items-center text-gray-700 ">
                     <img
                       className="inline-block w-10 h-10 rounded-full"
-                      src="https://media.licdn.com/dms/image/C4E03AQGQpyzCu-8lMQ/profile-displayphoto-shrink_200_200/0/1633400110598?e=2147483647&v=beta&t=vg4qKoJr98LPwJ6lYI88gZ2R4mFdS0vgZxBmqIQAYr8"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSF-bcGBxBHILbnh7_FTJupbPJFofgbKW04UKCop7ypJb90DD_LYJC_i2fCvCFYBcdpqkk&usqp=CAU"
                       alt="Dan_Abromov"
                     />
                   </a>
                 </div>
 
-                {/*Dark mode*/}
                 <div className="flex lg:ml-6">
                   <button className="" onClick={toggleMode}>
-                    
                     {mode === "light" ? (
                       <FiSun className="" size={30} />
                     ) : "dark" ? (
@@ -307,7 +335,7 @@ export default function Navbar() {
                       className="ml-2 text-sm font-medium text-gray-700 group-"
                       style={{ color: mode === "dark" ? "white" : "" }}
                     >
-                      {cartItem.length}
+                      {cartItems.length}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Link>
@@ -320,3 +348,5 @@ export default function Navbar() {
     </div>
   );
 }
+
+export default Navbar;
