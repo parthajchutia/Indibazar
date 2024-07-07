@@ -88,7 +88,7 @@ function Navbar() {
                     ""
                   )}
 
-                  {user?.user?.email === "knupadhyay784@gmail.com" ? (
+                  {user?.user?.email === "parthajyoti2003@gmail.com" ? (
                     <div className="flow-root">
                       <Link
                         to={"/dashboard"}
@@ -206,7 +206,6 @@ function Navbar() {
                 </svg>
               </button>
 
-              {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
                 <Link to={"/"} className="flex">
                   <div className="flex ">
