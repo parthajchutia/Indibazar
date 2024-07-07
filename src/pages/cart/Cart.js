@@ -42,7 +42,7 @@ function Cart() {
   const shipping = parseInt(100);
 
   const grandTotal = shipping + totalAmout;
-  // console.log(grandTotal)
+  
 
   /**========================================================================
    *!                           Payment Intigration
@@ -54,7 +54,7 @@ function Cart() {
   const [phoneNumber, setPhoneNumber] = useState("")
 
   const buyNow = async () => {
-    if (name === "" || address == "" || pincode == "" || phoneNumber == "") {
+    if (name === "" || address === "" || pincode === "" || phoneNumber === "") {
       return toast.error("All fields are required", {
         position: "top-center",
         autoClose: 1000,
