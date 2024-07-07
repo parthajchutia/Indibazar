@@ -13,7 +13,7 @@ export default function Footer() {
                         <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3" style={{ color: mode === 'dark' ? 'white' : '' }}>CATEGORIES</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800" style={{ color: mode === 'dark' ? 'white' : '' }}>Home</a>
+                                <a className="text-gray-600 hover:text-gray-800" href="/" style={{ color: mode === 'dark' ? 'white' : '' }}>Home</a>
                             </li>
                             <li>
                                 <a className="text-gray-600 hover:text-gray-800" style={{ color: mode === 'dark' ? 'white' : '' }}>Order</a>
@@ -22,7 +22,7 @@ export default function Footer() {
                                 <a className="text-gray-600 hover:text-gray-800" style={{ color: mode === 'dark' ? 'white' : '' }}>Local For Vocal</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800" style={{ color: mode === 'dark' ? 'white' : '' }}>Cart</a>
+                                <a className="text-gray-600 hover:text-gray-800" href='/cart' style={{ color: mode === 'dark' ? 'white' : '' }}>Cart</a>
                             </li>
                         </nav>
                     </div>
@@ -70,6 +70,7 @@ export default function Footer() {
                     </Link>
                     <p className="text-sm text-gray-500 sm:ml-6 sm:mt-0 mt-4" style={{ color: mode === 'dark' ? 'white' : '' }}>© 2024 Indibazar —
                         <a href="https://www.linkedin.com/" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank" style={{ color: mode === 'dark' ? 'white' : '' }}>www.Indibazar.asom</a>
+                        <p>developed by @partha </p>
                     </p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
                         <a className="text-gray-500">
